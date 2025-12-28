@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/db';
 import { Bot, User } from '@/lib/models';
 import { Types } from 'mongoose';
+import { scrapeWebsite } from '@/lib/scraper';
 
 export async function POST(req: Request) {
   await connectToDatabase();
@@ -58,36 +59,20 @@ export async function POST(req: Request) {
         }
     }
 
-    // Scrape Website
-    let scrapedContent = '';
+    // Scrape Website (Multi-page Smart Scrape)
+    let scrapedData = null;
+    let extractedPhones: string[] = [];
+    let extractedEmails: string[] = [];
+
     try {
         if (websiteUrl) {
-            const cheerio = require('cheerio');
-            const res = await fetch(websiteUrl);
-            const html = await res.text();
-            const $ = cheerio.load(html);
-            
-            // Extract text from reasonable elements
-            $('p, h1, h2, h3, h4, h5, li, a, span').each((_: any, el: any) => {
-                const text = $(el).text().trim();
-                // Filter out short snippets unless it looks like a phone number
-                if (text.length > 20 || (text.length > 7 && text.match(/[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/))) { 
-                    scrapedContent += text + '\n';
-                }
-            });
-            
-            // Limit scraped content length
-            scrapedContent = scrapedContent.slice(0, 10000); 
+           scrapedData = await scrapeWebsite(websiteUrl);
+           extractedPhones = scrapedData.contacts.phones;
+           extractedEmails = scrapedData.contacts.emails;
         }
     } catch (e) {
         console.error("Failed to scrape website:", e);
-        scrapedContent = "(Could not scrape website content)";
     }
-
-    // Try to extract a specific phone number from scraped content
-    const phoneRegex = /(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/g;
-    const scrapedPhones = scrapedContent.match(phoneRegex);
-    const scrapedPhone = scrapedPhones ? scrapedPhones[0] : '';
     
     // Combine training data
     const trainingData = `
@@ -96,10 +81,13 @@ export async function POST(req: Request) {
         Phone: ${phone}
         Address: ${address}
         Description: ${description}
-        Scraped Phone: ${scrapedPhone}
         
+        --- Scraped Contacts ---
+        Emails: ${extractedEmails.join(', ')}
+        Phones: ${extractedPhones.join(', ')}
+
         --- Scraped Website Content ---
-        ${scrapedContent}
+        ${scrapedData ? scrapedData.rawText : '(Could not scrape content)'}
     `;
 
     const bot = await Bot.create({

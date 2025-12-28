@@ -172,7 +172,7 @@ export default function WidgetPage({ params }: { params: Promise<{ id: string }>
       <div className="p-4 border-t bg-white">
         <form onSubmit={sendMessage} className="flex gap-2">
           <input
-            className="flex-1 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+            className="flex-1 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent placeholder:text-gray-400"
             placeholder="Type your message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, Code, MessageSquare, Save } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import EmbedCodeViewer from '@/components/admin/EmbedCodeViewer';
 
 async function getBot(id: string) {
   await connectToDatabase();
@@ -76,12 +77,7 @@ export default async function BotDetailPage({ params }: { params: Promise<{ id: 
                 <p className="text-sm text-muted-foreground mb-4">
                     Copy and paste this code into your website's HTML to add the chatbot.
                 </p>
-                <div className="relative rounded-md bg-muted p-4 font-mono text-sm break-all bg-gray-100 dark:bg-zinc-800">
-                    {embedCode}
-                </div>
-                <Button className="mt-4 w-full" variant="outline">
-                    Copy to Clipboard
-                </Button>
+                <EmbedCodeViewer botId={bot._id} />
             </div>
              <div className="rounded-xl border bg-card text-card-foreground shadow-sm p-6">
                 <h3 className="font-semibold mb-4">Preview</h3>
