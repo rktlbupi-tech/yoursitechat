@@ -33,12 +33,12 @@ export default function Features() {
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3 mt-12">
           {features.map((feature, index) => (
-            <div key={index} className="flex flex-col items-center space-y-4 p-6 border rounded-xl bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800 hover:shadow-lg transition-all duration-200">
-              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-full">
+            <div key={index} className="group flex flex-col items-center space-y-4 p-6 border border-border rounded-xl bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-full group-hover:bg-blue-100 dark:group-hover:bg-blue-800/30 transition-colors">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">{feature.title}</h3>
-              <p className="text-center text-gray-500 dark:text-gray-400">
+              <h3 className="text-xl font-bold text-foreground">{feature.title}</h3>
+              <p className="text-center text-muted-foreground">
                 {feature.description}
               </p>
             </div>

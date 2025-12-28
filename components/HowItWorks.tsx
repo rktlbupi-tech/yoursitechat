@@ -31,14 +31,14 @@ export default function HowItWorks() {
         
         <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
             {steps.map((step, index) => (
-                <div key={index} className="relative flex flex-col p-6 bg-white dark:bg-black rounded-lg shadow-sm border dark:border-zinc-800">
+                <div key={index} className="relative flex flex-col p-6 bg-card rounded-xl shadow-sm border border-border hover:border-primary/20 transition-colors">
                     <div className="flex items-center gap-4 mb-4">
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg shadow-md shadow-blue-600/20">
                             {index + 1}
                         </span>
-                        <h3 className="text-xl font-bold text-black dark:text-white">{step.title}</h3>
+                        <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
                     </div>
-                    <p className="text-gray-500 dark:text-gray-400 pl-14">
+                    <p className="text-muted-foreground pl-14">
                         {step.description}
                     </p>
                 </div>

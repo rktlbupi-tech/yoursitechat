@@ -31,12 +31,12 @@ export default function LoginPage() {
                 <Bot className="h-6 w-6" />
             </div>
             <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-muted-foreground">
                 Enter your email to sign in to your account
             </p>
         </div>
         
-        <div className="rounded-xl border bg-white p-6 shadow-sm dark:bg-black dark:border-zinc-800">
+        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                     <label className="text-sm font-medium leading-none" htmlFor="email">Email</label>

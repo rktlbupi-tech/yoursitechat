@@ -186,9 +186,9 @@ export default function WidgetPage({ params }: { params: Promise<{ id: string }>
             <Send className="h-4 w-4" />
           </Button>
         </form>
-        <div className="mt-2 text-center text-[10px] text-gray-400">
-            Powered by YourSiteBot
-        </div>
+        {/* <div className="mt-2 text-center text-[10px] text-gray-400">
+            For your love. No hidden fees. Completly Free.
+        </div> */}
       </div>
     </div>
   );

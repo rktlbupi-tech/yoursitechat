@@ -21,9 +21,9 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header/Nav would be here, assuming layout handles it or we make a minimal one */}
-       <header className="flex h-16 items-center border-b px-6">
+        <header className="flex h-16 items-center border-b px-6">
         <div className="flex items-center gap-2 font-bold text-xl">
-           <span>YourSiteChat</span>
+           <span>Gchat</span>
         </div>
       </header>
 
@@ -45,7 +45,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold">Email Us</h3>
-                  <a href="mailto:contact@yoursitechat.com" className="text-gray-500 hover:text-blue-600 dark:text-gray-400">contact@yoursitechat.com</a>
+                  <a href="mailto:contact@gchat.com" className="text-gray-500 hover:text-blue-600 dark:text-gray-400">contact@gchat.com</a>
                 </div>
               </div>
               
